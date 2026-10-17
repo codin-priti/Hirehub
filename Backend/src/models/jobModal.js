@@ -1,0 +1,48 @@
+import mongoose from "mongoose";
+
+const jobSchema = new mongoose.Schema(
+    {
+        title: {
+            type: String,
+            required: true
+        },
+
+        description: {
+            type: String,
+            required: true
+        },              
+
+        location: {
+            type: String,
+            required: true
+        },
+        salary: {
+            type: Number,
+            required: true
+        },
+        company: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Company",
+            required: true
+        },
+
+        jobType: {
+            type: String,
+            enum: ["full-time", "part-time", "contract", "internship"],
+            required: true
+        },
+
+        isPublic: {
+            type: Boolean,
+            default: true
+        },
+        joiningDate: {
+            type: Date,
+            required: true
+        }
+    },
+)
+
+const Job = mongoose.model("Job", jobSchema);
+
+export default Job;
